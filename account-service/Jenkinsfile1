@@ -1,6 +1,9 @@
 pipeline{
   agent { label 'new' }
   stages {
+    stage('git') {
+      steps {
+        git 'https://github.com/mspk1/sample-spring-microservices.git'
     stage('maven') {
       steps {
         dir ("account-service")
