@@ -1,23 +1,28 @@
+
 pipeline{
   agent { label 'new' }
-  stages {
+  environment{
+    PATH="/opt/apache-maven-3.6.3/bin:$PATH"
+  }
+  stages{
     stage('git') {
-      steps {
-        git 'https://github.com/mspk1/sample-spring-microservices.git'
-    stage('maven') {
-      steps {
-        dir ("account-service")
+      steps{
+       git url: 'https://github.com/mspk1/sample-spring-microservices.git', branch: 'master'
+       }
+    }
+    stage('maven'){
+      steps{
+        dir ("account-service"){
         sh "mvn clean install package"
         }
-     }   
-      
-    stage('build image') {
-      steps {
-        dir ('account-service'){
+      }
+    }
+    stage("build image"){
+      steps{
+        dir ("account-service"){
         sh "docker build -t javaimage ."
-       }
-     }
-   }  
-   }  
-   
-}   
+        }
+      }
+    }
+  }  
+}  
