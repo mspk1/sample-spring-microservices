@@ -4,10 +4,14 @@ pipeline{
     stage('git') {
       steps {
         git 'https://github.com/mspk1/sample-spring-microservices.git'
-        dir("account-service")
-          sh "mvn clean install"
           }
       }
+    stage('maven') {
+      steps {
+        dir ("account-service")
+        sh "mvn clean install package"
+        }
+     }   
       
     stage('build image') {
       steps {
