@@ -1,0 +1,12 @@
+pipeline{
+  any agent
+  stages {
+    stage('git') {
+      steps {
+        git 'https://github.com/mspk1/sample-spring-microservices.git'
+        dir("account-service")
+          sh "mvn clean install"
+          }
+      }
+   }
+}   
