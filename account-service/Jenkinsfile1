@@ -8,5 +8,14 @@ pipeline{
           sh "mvn clean install"
           }
       }
-   }
+      
+    stage('build image') {
+      steps {
+        dir ('account-service'){
+        sh 'docker build -t javaimage .'
+       }
+     }
+   }  
+   }  
+   
 }   
